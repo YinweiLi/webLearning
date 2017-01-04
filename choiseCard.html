@@ -1,0 +1,115 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        #menu{
+            height: 30px;
+        }
+        #menu li{
+            width: 120px;
+            height: 30px;
+            background: gray;
+            float: left;
+            margin-right: 10px;
+            text-align: center;
+            line-height: 30px;
+            /*单行文字纵向居中，行行之间的距离*/
+
+
+        }
+        #container{
+            width: 400px;
+            height: 300px;
+            /*border: 1px dotted #000;*/
+            /*/!*position: relative;*!/*/
+            /*position: absolute;*/
+            /*top: 50%;*/
+            /*left: 50%;*/
+            /*/!*往回移动一半*!/*/
+            /*margin-top: -150px;*/
+            /*margin-left: -200px;*/
+            margin: 200px auto;
+            /*只有margin的第二个参数可以用auto，可以水平居中*/
+        }
+
+
+        #content div{
+            width: 400px;
+            height: 100px;
+            background: gray;
+            display: none;
+        }
+        #menu .selected{
+            background: black;
+            color: white;
+            /*display: block;*/
+        }
+        #content{
+            border-top: 1px solid #0f0;
+
+        }
+        #content .selected{
+            display: block;
+        }
+
+
+
+    </style>
+
+</head>
+<body>
+        <div id="container">
+            <ul id="menu">
+                <li class="selected">html</li>
+                <li>css</li>
+                <li>js</li>
+            </ul>
+
+            <div id="content">
+
+                <div class="selected">aaaaaaaaaa</div>
+                <div>bbbbbbbbbbbbbbbbbb</div>
+                <div>ccccccccccccccccccc</div>
+            </div>
+
+        </div>
+
+        <script>
+            var oMenu = document.getElementById("menu");
+            var aLi = oMenu.getElementsByTagName("li");
+            var oContent = document.getElementById("content");
+            var aDiv = oContent.getElementsByTagName("div");
+            for(var i=0;i<aLi.length;i++){
+                aLi[i].No = i;
+//                保存当前下标
+                aLi[i].onclick = function(){
+                    for(var i =0 ;i<aLi.length;i++){
+                        aLi[i].className = "";
+                        aDiv[i].className = "";
+                    }
+                this.className = "selected";
+                aDiv[this.No].className = "selected";
+                };
+
+            }
+
+
+
+        </script>
+</body>
+</html>
+<!--
+事件三要素
+1事件源
+2处理函数
+3事件对象，function（e）其实是有参数的e可以获取鼠标点击的坐标，e就是事件对象
+-->
