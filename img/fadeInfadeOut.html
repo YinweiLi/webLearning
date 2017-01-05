@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>轮播图</title>
+    <style>
+
+        *{
+            margin: 0;
+            padding: 0;
+        }
+
+        ul{
+            list-style: none;
+
+
+        }
+        img{
+            border: 0;
+        }
+
+
+
+        #container{
+
+            width: 310px;
+            height: 310px;
+            margin: 100px auto;
+            position: relative;
+
+        }
+        #imgs img{
+            /*/!*display: none;*!/*/
+            /*opacity: 0.5;*/
+        /*/!*取值范围0-1*!/*/
+        /*filter: alpha(opacity=50);*/
+            /*/!*ie6不支持必须加这句话，取值0-100*!/*/
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        /*#imgs .selected{*/
+            /*display: block;*/
+        /*}*/
+
+        #tab li{
+            width: 20px;
+            height: 20px;
+            background: black;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            float: left;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+        #tab{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            z-index: 999;
+
+        }
+        #tab .selected{
+            background: orangered;
+        }
+        #arrows{
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            z-index: 998;
+        }
+        #arrows span{
+            width: 20px;
+            height: 20px;
+            background: darkred;
+            color: #fff;
+            text-align: center;
+            line-height: 20px;
+            float: left;
+            margin-right: 5px;
+            cursor: pointer;
+
+            /*行级元素设宽高
+            变成block
+            定位，浮动的行级元素都可以设置宽高
+            */
+
+        }
+    </style>
+
+    <!--子元素在父元素内定位
+    一般情况下
+    子元素：绝对定位
+    父元素：相对定位
+    -->
+
+
+</head>
+<body>
+<div id="container">
+
+    <div id="imgs">
+
+        <!--<img src="img1/广告1.jpg" alt="img失败" title="img"/>-->
+        <!--<img src="img1/广告2.jpg" alt="img失败" title="img" class="selected"/>-->
+        <!--<img src="img1/广告3.jpg" alt="img失败" title="img"/>-->
+        <!--<img src="img1/广告4.jpg" alt="img失败" title="img"/>-->
+        <img src="广告1.jpg" style="z-index: 4" class="selected"/>
+        <img src="广告2.jpg" style="z-index: 3"/>
+        <img src="广告3.jpg" style="z-index: 2"/>
+        <img src="广告4.jpg" style="z-index: 1"/>
+    </div>
+    <ul id="tab">
+        <li class="selected">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+            <span id="arrows">
+                <span id="prev">&lt</span>
+                <span id="next">&gt</span>
+            </span>
+
+
+
+</div>
+
+
+<script src="jslib.js"></script>
+<script>
+
+    var oTab = document.getElementById("tab");
+    var aLi = oTab.getElementsByTagName("li");
+    var oImg = document.getElementById("imgs");
+    var aImg = oImg.getElementsByTagName("img");
+    //    var oUl = document.getElementsByName("arrow");
+    var oPrev = document.getElementById("prev");
+    var oNext = document.getElementById("next");
+    //    用先获取oUl在按id获取oprev和onext不好使
+    var oDiv = document.getElementById("container");
+    var N = 0;
+    //    用N来记住当前到底点的是谁
+    var T;
+
+
+    oPrev.onclick = oNext.onclick = function(){
+
+        if(this == oNext){
+            N++;
+            if(N == 4){
+                N = 0;
+            }
+//            用求余%算数运算不怎么方便，还是这个比较简洁
+        }
+        else{
+            N--;
+            if(N == -1){
+                N = 3;
+            }
+        }
+        imgChange();
+//        for(var i = 0;i < aLi.length;i++){
+//            aImg[i].className = "";
+//            aLi[i].className = "";
+//        }
+//        aLi[N].className = "selected";
+//        aImg[N].className = "selected";
+//        这些封装成一个函数
+    };
+
+
+    for(var i = 0;i<aLi.length;i++){
+        aLi[i].No = i;
+        aLi[i].onmouseover = function(){
+            N = this.No;
+            imgChange();
+//            for(var i = 0;i < aLi.length;i++){
+//                aImg[i].className = "";
+//                aLi[i].className = "";
+//            }
+//            this.className = "selected";
+//            aImg[this.No].className = "selected";
+//            this.No都用N全局变量来代替了
+        };
+    }
+    var zIndex = 4;
+    var imgChange = function(){
+        for(var i = 0;i < aLi.length;i++){
+            aImg[i].className = "";
+            aLi[i].className = "";
+        }
+        aLi[N].className = "selected";
+//        aImg[N].className = "selected";
+        aImg[N].style.opacity = 0;
+        aImg[N].style.filter = "alpha(opacity=0)";
+        aImg[N].style.zIndex = ++zIndex;
+        animate(aImg[N],{
+        opacity: 100
+        });
+
+    }
+
+    var play = function(){
+        T = setInterval(function(){oNext.onclick();},500);
+//        设置定时器的时候有函数参数的格式问题，按此格式些就是正确的
+
+    };
+    play();
+    oDiv.onmouseover = function(){
+        clearInterval(T);
+    };
+    oDiv.onmouseout = function(){
+        play();
+    };
+
+
+
+</script>
+</body>
+</html>

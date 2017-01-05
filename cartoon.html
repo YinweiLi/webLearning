@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>按钮</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #div1{
+            height: 200px;
+            width: 200px;
+            background: #ff00ff;
+            position: relative;
+        }
+    </style>
+</head>
+<body>
+        <button id="but">move</button>
+        <div id="div1"></div>
+        <script>
+            var oDiv = document.getElementById("div1");
+            var oBut = document.getElementById("but");
+//            offset偏移，内联外部都能获取到
+//            offsettop（相对于最近的已经定位的祖先元素的位置）
+//            offsetleft（相对于最近的已经定位的祖先元素的位置）
+//            offsetwidth（内容+padding+border）
+//            offsetheight（内容+padding+border）
+//            offsetparent（离他最近的已经定位的祖先元素的那个对象）
+//            定义对象的方法
+//
+//            js是基于面向对象的语言
+//            es6是最新的js版本
+
+            oBut.onclick = function(){
+                var Ti = setInterval(function(){
+
+                    oDiv.style.left = oDiv.offsetLeft + 10 +"px";
+                    if(oDiv.offsetLeft >500){
+                        clearInterval(Ti);
+                    }
+                },100)
+            }
+
+        </script>
+</body>
+</html>
