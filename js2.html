@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 200px;
+            background: #ff0000;
+        }
+    </style>
+</head>
+<body>
+    <div id="div1">haha</div>
+
+    <script>
+        //基本数据类型：number, string, boolean, undefined, null
+        //引用类型：object
+
+        var elem = document.getElementById("div1");
+        elem.onmouseover = function () {//事件
+            elem.style.width = '400px';
+            elem.style.background = '#00ff00';
+        };
+    </script>
+</body>
+</html>

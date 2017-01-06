@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title></title>
+    <style>
+        #div1{
+            width: 200px;
+            height: 300px;
+            background: gray;
+
+        }
+    </style>
+
+</head>
+<body>
+
+<div id="div1">nini</div>
+
+
+
+
+<script>
+    var elem = document.getElementById("div1");//div对象
+    //基本数据类型number,string ,boolean,undefine,null,
+    //引用object
+   // elem.id="aa";
+    elem.onmouseover = function(){//单机事件
+      elem.style.width = '400px';
+        elem.style.height = '100px';
+        elem.style.background = "green";
+
+        //alert("ok");
+
+    };
+
+
+//      js的数据类型（基本和引用两种）
+//    var a = 5;//number数值
+//    var b = 5.5;//number
+//    var c = "asd";//string字符串
+//    var d = true;//boolean布尔
+    //var s;undefine声明了没赋值
+    //var e = null;null//试图去获取不存在的元素
+
+//    //alert(a);
+//       运算＋号最特殊转化字符串
+//    console.log( c % 4 );//NaN(not a number)
+//    console.log(a > a);
+//    console.log(true && false);
+//    console.log(!false);
+//
+//    for(var i = 0;i<10;i++){
+//        console.log(i+",")
+//    }
+//        function aa(){
+//            alert("qqqqqq")
+//        }
+//        aa();
+//      数组
+    var arr = [1,2,3,4,5];
+    console.log(arr[3]);
+//          对象
+
+//    anything is object
+        //1.内置对象
+        //2.dom对象（document object model）html和css的东西看成对象
+        //3.自定义对象
+    //this 当前对象的引用
+
+    var person = new Object();
+    person.name = "lisi";
+    person.sayhello = function(){
+        console.log(this.name+"hello")
+    };
+    person.sayhello();
+
+
+
+</script>
+</body>
+</html>

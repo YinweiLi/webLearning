@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>多级菜单</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;/*小点干掉*/
+        }
+        a{
+            text-decoration: none;
+        }
+        img{
+            border: 0;
+        }
+        /*样式重置*/
+
+        /*#menu > li{*/
+        /*/!*选儿子和选后代不一样*!/*/
+
+        /*}*/
+        #menu{
+            height: 30px;
+        }
+        #menu .main-menu{
+            width: 120px;
+            height: 30px;
+            float: left;
+            margin-right: 5px;
+            background: gray;
+            /*line-height: 30px;*/
+            position: relative;
+        }
+
+        #menu .main-menu-link{
+            height: 100%;
+            display: block;
+            line-height: 30px;
+            /*position: absolute;*/
+
+        }
+        #menu .submenu{
+            position: absolute;
+            left: 0px;
+            top: 30px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+
+        <ul id="menu">
+            <li class="main-menu">
+                <a href="#" class="main-menu-link">list1</a>
+                <ul class="submenu">
+                    <li>
+                        <a href="#">list1</a>
+                    </li>
+                    <li>
+                        <a href="#">list2</a>
+                    </li>
+                    <li>
+                        <a href="#">list3</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="main-menu">
+                <a href="#" class="main-menu-link">list2</a>
+                <ul class="submenu">
+                    <li>
+                        <a href="#">list1</a>
+                    </li>
+                    <li>
+                        <a href="#">list2</a>
+                    </li>
+                    <li>
+                        <a href="#">list3</a>
+                    </li>
+
+                </ul>
+            </li>
+            <li class="main-menu">
+                <a href="#" class="main-menu-link">list3</a>
+                <ul class="submenu">
+                    <li>
+                        <a href="#">list1</a>
+                    </li>
+                    <li>
+                        <a href="#">list2</a>
+                    </li>
+                    <li>
+                        <a href="#">list3</a>
+                    </li>
+
+                </ul>
+            </li>
+
+        </ul>
+        <h1>haha</h1>
+
+        <script>
+            var mainMenu = document.getElementsByClassName("main-menu");
+            //console.log(mainMenu);
+            for(var i = 0;i < mainMenu.length;i++){
+                mainMenu[i].onmouseover = function(){
+                    var sub = this.getElementsByClassName("submenu")[0];
+                    sub.style.display = "block";
+                };
+                mainMenu[i].onmouseout = function(){
+                    var sub = this.getElementsByClassName("submenu")[0];
+                    sub.style.display = "none";
+                };
+
+            }
+
+
+        </script>
+
+</body>
+</html>

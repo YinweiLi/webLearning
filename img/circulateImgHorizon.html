@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>轮播图左右</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        img{
+            border: 0;
+        }
+        #container{
+            /**/
+            width: 310px;
+            height: 310px;
+            position: relative;
+            margin: 100px auto;
+            overflow: hidden;
+            /*border: ;*/
+        }
+        #img1 img{
+            margin-right: 0;
+            background: #ff00ff;
+
+        }
+        #img2 img{
+            margin-right: 0;
+
+        }
+        #img1{
+            /*要让图片都横过来，就把他的父亲设的特别宽，爷爷设的正好宽且溢出隐藏，*/
+            width: 1300px;
+            height: 310px;
+
+            position: absolute;
+         }
+        #img2{
+            /*要让图片都横过来，就把他的父亲设的特别宽，爷爷设的正好宽且溢出隐藏，*/
+            width: 1300px;
+            height: 310px;
+
+            position: absolute;
+            left: 1240px;
+        }
+        #tab li{
+            width: 20px;
+            height: 20px;
+            background: black;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            float: left;
+            margin-right: 5px;
+            cursor: pointer;
+
+        }
+        #tab{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            z-index: 998;
+        }
+        #arrows{
+            position: absolute;
+            left: 10px;
+            bottom: 10px;
+            z-index: 998;
+        }
+        #arrows span{
+            width: 20px;
+            height: 20px;
+            background: black;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            float: left;
+            margin-right: 5px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+<div id="container">
+
+    <div id="img1">
+
+        <!--<img src="广告1.jpg" alt="img失败" title="img" class="selected"/>-->
+        <!--<img src="广告2.jpg" alt="img失败" title="img"/>-->
+        <!--<img src="广告3.jpg" alt="img失败" title="img"/>-->
+        <!--<img src="广告4.jpg" alt="img失败" title="img"/>-->
+        <img src="广告1.jpg" style="z-index: 4" class="selected"/><img src="广告2.jpg" style="z-index: 3"/><img src="广告3.jpg" style="z-index: 2"/><img src="广告4.jpg" style="z-index: 1"/>
+    </div>
+    <div id="img2">
+
+        <!--<img src="广告1.jpg" alt="img失败" title="img" class="selected"/>-->
+        <!--<img src="广告2.jpg" alt="img失败" title="img"/>-->
+        <!--<img src="广告3.jpg" alt="img失败" title="img"/>-->
+        <!--<img src="广告4.jpg" alt="img失败" title="img"/>-->
+        <img src="广告1.jpg" style="z-index: 4" class="selected"/><img src="广告2.jpg" style="z-index: 3"/><img src="广告3.jpg" style="z-index: 2"/><img src="广告4.jpg" style="z-index: 1"/>
+    </div>
+    <ul id="tab">
+        <li class="selected">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+            <span id="arrows">
+                <span id="prev">&lt</span>
+                <span id="next">&gt</span>
+            </span>
+
+
+
+</div>
+
+
+
+<script>
+    var oImg1 = document.getElementById("img1");
+    var aImg1 = oImg1.getElementsByTagName("img");
+    var oImg2 = document.getElementById("img2");
+    var aImg2 = oImg2.getElementsByTagName("img");
+    var oRight = document.getElementById("prev");
+    var oLeft = document.getElementById("next");
+    var T ;
+    var Left1 = 0;
+    var Left2 = 1240;
+    var speed = -1;
+    play();
+    function play(){
+    T = setInterval(function(){
+//        Left = oImg.offsetLeft;
+        if(Left1 == -1240){
+            Left1=0;
+            Left2=1240;
+        }else{
+            if(Left1 == 0){
+                Left1
+            }
+        }
+        Left1 += speed;
+        Left2 += speed;
+        oImg1.style.left = Left1+'px';
+        oImg2.style.left = Left2+'px';
+//        console.log(Left1);
+
+
+    },5);
+    }
+    oRight.onmouseover = oLeft.onmouseover = function(){
+      if(this == oRight){
+          speed = -1;
+      }else{
+          speed = 1;
+      }
+    };
+
+</script>
+</body>
+</html>
