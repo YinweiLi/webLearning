@@ -1,0 +1,205 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>轮播图速度渐变</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        ul{
+            list-style: none;
+        }
+        img{
+            border: 0;
+        }
+        #container{
+            /**/
+            width: 310px;
+            height: 310px;
+            position: relative;
+            margin: 100px auto;
+            overflow: hidden;
+            /*border: ;*/
+            border-radius: 10px;
+        }
+        #imgs img{
+            margin-right: 0;
+            background: #ff00ff;
+
+        }
+
+        #imgs{
+            /*要让图片都横过来，就把他的父亲设的特别宽，爷爷设的正好宽且溢出隐藏，*/
+            width: 2600px;
+            height: 310px;
+            position: absolute;
+            left: 0;
+            top: 0;
+            float: left;
+        }
+
+        #tab li{
+            width: 20px;
+            height: 20px;
+            background: black;
+            color: white;
+            text-align: center;
+            line-height: 20px;
+            float: left;
+            margin-right: 5px;
+            cursor: pointer;
+            border-radius: 10px;
+            opacity: .5;
+            /*font: 100px;*/
+
+        }
+        #tab .selected{
+            background: orangered;
+        }
+        #tab{
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            z-index: 998;
+
+
+        }
+        /*#arrows{*/
+            /*position: absolute;*/
+            /*left: 10px;*/
+            /*bottom: 10px;*/
+            /*z-index: 998;*/
+        /*}*/
+        #arrows span{
+            width: 80px;
+            height: 80px;
+            background: black;
+            color: white;
+            text-align: center;
+            line-height: 80px;
+            float: left;
+            margin-right: 5px;
+            cursor: pointer;
+            border-radius: 40px;
+            opacity: .25;
+            font-size: 40px;
+
+        }
+        #next{
+            position: absolute;
+            bottom: 50%;
+            right: -40px;
+        }
+        #prev{
+            position: absolute;
+            bottom: 50%;
+            left: -40px;
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+
+    <div id="imgs">
+
+        <img src="广告1.jpg" style="z-index: 4" class="selected"/><img src="广告2.jpg" style="z-index: 3"/><img src="广告3.jpg" style="z-index: 2"/><img src="广告4.jpg" style="z-index: 1"/>
+    </div>
+
+    <ul id="tab">
+        <li class="selected">1</li>
+        <li>2</li>
+        <li>3</li>
+        <li>4</li>
+    </ul>
+            <span id="arrows">
+                <span id="prev">&lt</span>
+                <span id="next">&gt</span>
+            </span>
+
+
+
+</div>
+<script src="jslib.js"></script>
+<script>
+    window.onload = function(){
+        var oDiv = document.getElementById("container");
+        var oTab = document.getElementById("tab");
+        var aLi = oTab.getElementsByTagName("li");
+        var oImgs = document.getElementById("imgs");
+        var aImg = oImgs.getElementsByTagName("img");
+        var oPrev = document.getElementById("prev");
+        var oNext = document.getElementById("next");
+//ImageMove
+//            图片在加载时会有时间差
+//            先加载dom结构，但是图片可能会过一会才能加载完
+//            img没加载完成，取他的大小取不到
+//            window是最大的全局对象
+//            window.onload是资源文件都加载完才执行里面代码
+//            script代码写在body最下面还是写在window.onload里面的区别（面试）
+//            写在body上面只能保证dom结构加载完成
+        var N=0;
+        var imgWidth = aImg[0].offsetWidth;
+        oImgs.appendChild(aImg[0].cloneNode());
+        for(var i = 0;i < aLi.length;i++){
+//            N = i;
+            aLi[i].index = i;
+            aLi[i].onmouseover = function(){
+                N = this.index;
+                imgChange();
+            };
+        }
+        function imgChange(){
+            for(var i = 0;i<aLi.length;i++){
+                aLi[i].className = "";
+            }
+            aLi[N%4].className = "selected";
+            animate(oImgs,{
+                left: -N*imgWidth
+            });
+        }
+        oPrev.onclick = oNext.onclick = function(){
+            if(this == oPrev){
+                N--;
+                if(N == -1){
+                N = aImg.length-2;//
+                oImgs.style.left = -imgWidth*4 +'px';
+                }
+//                N是想要表示下一张（即将要显示）的图片的索引
+//                ++、--之后再判断，N不能一直++、--，所以需要判断
+//                正负号问题
+//判断改变N的大小、要把oimg拽回到那里是需要逻辑上判断的，用一个图演示一下更清晰
+            }else{
+                N++;
+                if(N == aImg.length){
+                N = 1;//现在要显示第二张图片
+                oImgs.style.left = 0 + 'px';//拽到第一张然后动画移动到第二张
+                }
+
+            }
+            imgChange();
+        };
+        var T;
+        var play = function(){
+            T = setInterval(function(){oNext.onclick();},1000);
+//        设置定时器的时候有函数参数的格式问题，按此格式些就是正确的
+
+        };
+        play();
+        oDiv.onmouseover = function(){
+            clearInterval(T);
+        };
+        oDiv.onmouseout = function(){
+            play();
+        };
+
+
+
+    };
+
+
+
+</script>
+</body>
+</html>
