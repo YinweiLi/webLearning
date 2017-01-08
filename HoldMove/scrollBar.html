@@ -49,18 +49,25 @@
 </head>
 <body>
         <div id="container">
-            <span id="text">哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈
-                哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈
-                哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈
-                哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈啊哈
-                哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈
-                哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈
-                哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈啊
-                哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊
-                哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈
-                哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈
-                哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈
-                哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈</span>
+            <span id="text">哈哈1啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈
+                哈啊哈哈哈哈哈哈哈2哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈
+                哈哈啊哈哈哈哈哈哈哈3哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈
+                哈哈哈哈啊哈哈哈哈哈哈4哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈
+                哈哈哈哈哈啊哈哈哈哈哈哈5哈哈哈啊哈哈哈哈哈哈哈哈啊哈哈
+                哈哈哈哈哈哈哈啊哈哈哈哈哈6哈哈哈啊哈哈哈哈哈哈哈哈哈啊
+                哈哈哈哈哈哈哈哈啊哈哈哈哈哈7哈哈哈哈啊哈哈哈哈哈哈哈哈
+                啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈8哈哈哈哈啊哈哈哈哈哈哈哈
+                哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈9哈哈哈哈哈啊哈哈啊哈哈
+                哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈0哈哈哈哈哈啊哈哈哈啊
+                哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈4321哈啊哈哈哈哈哈哈哈
+                哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈2哈哈哈哈啊哈哈哈哈哈哈
+                哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈4哈哈哈哈哈哈哈哈哈哈
+                啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈5哈哈啊哈哈哈哈哈哈
+                哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈6哈哈啊哈哈哈哈哈
+                哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈8哈哈哈哈哈哈哈
+                哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈9啊哈哈哈哈哈
+                哈哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈3啊哈哈哈哈
+                </span>
 
             <div id="rollbar">
                 <div id="rollbarblock"></div>
@@ -73,32 +80,39 @@
 
 <script>
     oRollBarBlock = document.getElementById("rollbarblock");
+    oRollBar = document.getElementById("rollbar");
     oText = document.getElementById("text");
     oRollBarBlock.onmousedown = function(e){
         e = e || window.event;
 
         var iDisY = e.clientY - oRollBarBlock.offsetTop;
         document.onmousemove = function(e){
-           // elemt.style.left = e.clientX - iDisX + "px";
             oRollBarBlock.style.top = e.clientY - iDisY + "px";
-            oText.style.top = -(e.clientY - iDisY) + "px";
+
+            var top = e.clientY - iDisY;
+            var maxHeight = oRollBar.offsetHeight - oRollBarBlock.offsetHeight;
+            var fScale = top/maxHeight;
+            oText.style.top = -((oText.offsetHeight - oRollBar.offsetHeight)*fScale)+"px";
+
+//            oText.style.top = -(e.clientY - iDisY) + "px";
             if(oRollBarBlock.offsetTop <= 0){
                 oText.style.top = 0 + "px";
                 oRollBarBlock.style.top = 0 + "px";
             }else{
                 if(oRollBarBlock.offsetTop >= 230){
-                    oText.style.top = -(oText.offsetHeight-230) + "px";
+                    oText.style.top = -(oText.offsetHeight - oRollBar.offsetHeight) + "px";
                     oRollBarBlock.style.top = 230 + "px";
                 }
             }
-
+//          不能按距离做的按比例做，算一个他们之间的比例
+//            rollbarblock.top/rollbar.height-rollbarblock.height = Text.top/Text.height
             return false;
         };
 
         document.onmouseup = function(){
             document.onmousemove = null;
         };
-    }
+    };
 </script>
 </body>
 </html>

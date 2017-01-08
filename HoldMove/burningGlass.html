@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>放大镜</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+
+        }
+        #container{
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+        #container div{
+
+            overflow: hidden;
+            border: 1px solid black;
+            position: absolute;
+
+        }
+        #small{
+            width: 400px;
+            height: 400px;
+            top: 0;
+            left: 0;
+        }
+        #big{
+            width: 450px;
+            height: 450px;
+            top: 0;
+            left: 420px;
+        }
+        #small div{
+            width: 100px;
+            height: 100px;
+            background: white;
+            opacity: .3;
+            position: absolute;
+            top: 0;
+            left: 0;
+            visibility: hidden;
+
+        }
+        #bigImg{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="small">
+            <img src="1.jpg" alt="" />
+            <div></div>
+        </div>
+        <div id="big">
+            <img src="2.jpg" alt="" id="bigImg"/>
+        </div>
+
+    </div>
+<script>
+    oSmall = document.getElementById("small");
+    aSmallImg = oSmall.getElementsByTagName("img");
+    oGlass = oSmall.getElementsByTagName("div");
+    oMoveImg = document.getElementById("bigImg");
+    oSmall.onmouseover = function(e){
+        oGlass[0].style.visibility = "visible";
+        e = e || window.event;
+        var halfWidth = oGlass[0].offsetHeight/2;
+//        var iDisX = e.clientX - halfWidth;
+//        var iDisY = e.clientY - halfWidth;
+        document.onmousemove = function(e){
+            oGlass[0].style.left = e.clientX - halfWidth + "px";
+            oGlass[0].style.top = e.clientY - halfWidth + "px";
+            var timeX = oGlass[0].offsetLeft/(aSmallImg[0].offsetWidth-oGlass[0].offsetWidth);
+            var timeY = oGlass[0].offsetTop/(aSmallImg[0].offsetHeight-oGlass[0].offsetHeight);
+            oMoveImg.style.left = -(oMoveImg.offsetWidth*timeX)+"px";
+            oMoveImg.style.top = -(oMoveImg.offsetHeight*timeY)+"px";
+
+            if(oGlass[0].offsetTop <= 0){
+                console.log(oGlass[0].offsetTop);
+                oMoveImg.style.top = 0;
+            }
+            if(oGlass[0].offsetLeft <= 0){
+                oMoveImg.style.left = 0 + "px";
+            }
+
+            return false;
+        };
+
+
+
+
+    };
+    oSmall.onmouseout = function(){
+        oGlass[0].style.visibility = "hidden";
+        document.onmousemove = null;
+    };
+</script>
+</body>
+</html>
