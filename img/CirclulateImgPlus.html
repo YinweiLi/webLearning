@@ -16,8 +16,8 @@
         }
         #container{
             /**/
-            width: 310px;
-            height: 310px;
+            width: 790px;
+            height: 340px;
             position: relative;
             margin: 100px auto;
             overflow: hidden;
@@ -32,7 +32,7 @@
 
         #imgs{
             /*要让图片都横过来，就把他的父亲设的特别宽，爷爷设的正好宽且溢出隐藏，*/
-            width: 2600px;
+            width: 4000px;
             height: 310px;
             position: absolute;
             left: 0;
@@ -41,9 +41,9 @@
         }
 
         #tab li{
-            width: 20px;
-            height: 20px;
-            background: black;
+            width: 15px;
+            height: 15px;
+            background: white;
             color: white;
             text-align: center;
             line-height: 20px;
@@ -51,8 +51,12 @@
             margin-right: 5px;
             cursor: pointer;
             border-radius: 10px;
-            opacity: .5;
+            opacity: .7;
+            border: 3px solid black;
             /*font: 100px;*/
+            -webkit-transition:border linear .2s,-webkit-box-shadow linear .5s;
+            border-color:rgba(000,000,000,.7);
+            -webkit-box-shadow:0 0 18px rgba(255,255,255,3);
 
         }
         #tab .selected{
@@ -60,16 +64,22 @@
         }
         #tab{
             position: absolute;
-            right: 10px;
+            /*width: 100px;*/
+            right: 50%;
+            margin-right: -50px;
+            /*margin: 10px auto;*/
             bottom: 10px;
             z-index: 998;
+
 
 
         }
         /*#arrows{*/
             /*position: absolute;*/
-            /*left: 10px;*/
-            /*bottom: 10px;*/
+            /*/!*width: 790px;*!/*/
+            /*/!*height: 340px;*!/*/
+            /*bottom: 50%;*/
+            /*margin-top: 40px;*/
             /*z-index: 998;*/
         /*}*/
         #arrows span{
@@ -85,16 +95,21 @@
             border-radius: 40px;
             opacity: .25;
             font-size: 40px;
+            border: 3px solid white;
+
+
 
         }
         #next{
             position: absolute;
             bottom: 50%;
+            margin-bottom: -20px;
             right: -40px;
         }
         #prev{
             position: absolute;
             bottom: 50%;
+            margin-bottom: -20px;
             left: -40px;
         }
     </style>
@@ -104,14 +119,14 @@
 
     <div id="imgs">
 
-        <img src="广告1.jpg" style="z-index: 4" class="selected"/><img src="广告2.jpg" style="z-index: 3"/><img src="广告3.jpg" style="z-index: 2"/><img src="广告4.jpg" style="z-index: 1"/>
+        <img src="001.jpg"  class="selected"/><img src="002.jpg" /><img src="003.jpg" /><img src="004.jpg" />
     </div>
 
     <ul id="tab">
-        <li class="selected">1</li>
-        <li>2</li>
-        <li>3</li>
-        <li>4</li>
+        <li class="selected"></li>
+        <li></li>
+        <li></li>
+        <li></li>
     </ul>
             <span id="arrows">
                 <span id="prev">&lt</span>
@@ -184,11 +199,15 @@
         var play = function(){
             T = setInterval(function(){oNext.onclick();},1000);
 //        设置定时器的时候有函数参数的格式问题，按此格式些就是正确的
+            oNext.style.display = "none";
+            oPrev.style.display = "none";
 
         };
         play();
         oDiv.onmouseover = function(){
             clearInterval(T);
+            oNext.style.display = "block";
+            oPrev.style.display = "block";
         };
         oDiv.onmouseout = function(){
             play();

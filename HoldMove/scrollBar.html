@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>自制滚动条</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+        }
+        #container{
+            width: 250px;
+            height: 250px;
+            background: gray;
+            position: relative;
+            overflow: hidden;
+            border-radius: 5px;
+
+        }
+        #text{
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 230px;
+            color: black;
+            /*font-style: oblique;*/
+        }
+        #rollbar{
+            position: absolute;
+            width: 20px;
+            height: 250px;
+            background: dimgrey;
+            top: 0;
+            left: 230px;
+            border-radius: 5px;
+        }
+        #rollbarblock{
+            position: absolute;
+            width: 20px;
+            height: 20px;
+            background: black;
+            top: 0;
+            left: 0;
+            border-radius: 10px;
+            cursor: pointer;
+        }
+
+    </style>
+</head>
+<body>
+        <div id="container">
+            <span id="text">哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈
+                哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈
+                哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈
+                哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈啊哈
+                哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈
+                哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈
+                哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈啊
+                哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊
+                哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈哈哈哈啊哈
+                哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈
+                哈哈啊哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈
+                哈啊哈哈哈哈哈哈哈哈哈啊哈哈哈哈哈哈哈哈哈哈哈哈</span>
+
+            <div id="rollbar">
+                <div id="rollbarblock"></div>
+            </div>
+
+
+        </div>
+
+
+
+<script>
+    oRollBarBlock = document.getElementById("rollbarblock");
+    oText = document.getElementById("text");
+    oRollBarBlock.onmousedown = function(e){
+        e = e || window.event;
+
+        var iDisY = e.clientY - oRollBarBlock.offsetTop;
+        document.onmousemove = function(e){
+           // elemt.style.left = e.clientX - iDisX + "px";
+            oRollBarBlock.style.top = e.clientY - iDisY + "px";
+            oText.style.top = -(e.clientY - iDisY) + "px";
+            if(oRollBarBlock.offsetTop <= 0){
+                oText.style.top = 0 + "px";
+                oRollBarBlock.style.top = 0 + "px";
+            }else{
+                if(oRollBarBlock.offsetTop >= 230){
+                    oText.style.top = -(oText.offsetHeight-230) + "px";
+                    oRollBarBlock.style.top = 230 + "px";
+                }
+            }
+
+            return false;
+        };
+
+        document.onmouseup = function(){
+            document.onmousemove = null;
+        };
+    }
+</script>
+</body>
+</html>
