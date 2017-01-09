@@ -28,14 +28,14 @@
             left: 0;
         }
         #big{
-            width: 450px;
-            height: 450px;
+            width: 400px;
+            height: 400px;
             top: 0;
             left: 420px;
         }
         #small div{
-            width: 100px;
-            height: 100px;
+            width: 200px;
+            height: 200px;
             background: white;
             opacity: .3;
             position: absolute;
@@ -77,8 +77,8 @@
         document.onmousemove = function(e){
             oGlass[0].style.left = e.clientX - halfWidth + "px";
             oGlass[0].style.top = e.clientY - halfWidth + "px";
-            var timeX = oGlass[0].offsetLeft/(aSmallImg[0].offsetWidth-oGlass[0].offsetWidth);
-            var timeY = oGlass[0].offsetTop/(aSmallImg[0].offsetHeight-oGlass[0].offsetHeight);
+            var timeX = oGlass[0].offsetLeft/(aSmallImg[0].offsetWidth);
+            var timeY = oGlass[0].offsetTop/(aSmallImg[0].offsetHeight);
             oMoveImg.style.left = -(oMoveImg.offsetWidth*timeX)+"px";
             oMoveImg.style.top = -(oMoveImg.offsetHeight*timeY)+"px";
 
@@ -89,7 +89,12 @@
             if(oGlass[0].offsetLeft <= 0){
                 oMoveImg.style.left = 0 + "px";
             }
-
+            if(oGlass[0].offsetTop >= oSmall.offsetHeight-oGlass[0].offsetHeight){
+                oMoveImg.style.top = -((oSmall.offsetHeight-oGlass[0].offsetHeight)/oSmall.offsetHeight)*oMoveImg.offsetHeight+"px";
+            }
+            if(oGlass[0].offsetLeft >= oSmall.offsetWidth - oGlass[0].offsetWidth){
+                oMoveImg.style.left = -((oSmall.offsetWidth-oGlass[0].offsetWidth)/oSmall.offsetWidth)*oMoveImg.offsetWidth+"px";
+            }
             return false;
         };
 
