@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>放大镜S</title>
+    <style>
+        *{
+            padding: 0;
+            margin: 0;
+
+        }
+        #container{
+            position: relative;
+            top: 0;
+            left: 0;
+        }
+        #container div{
+
+            overflow: hidden;
+            border: 1px solid black;
+            position: absolute;
+
+        }
+        #small{
+            width: 400px;
+            height: 400px;
+            top: 0;
+            left: 0;
+        }
+        #big{
+            width: 400px;
+            height: 400px;
+            top: 0;
+            left: 420px;
+            visibility: hidden;
+        }
+        #bar{
+            width: 200px;
+            height: 200px;
+            background: white;
+            opacity: .3;
+            filter:alpha(opacity = 50);
+            position: absolute;
+            top: 0;
+            left: 0;
+            visibility: hidden;
+
+        }
+        #bigImg{
+            position: absolute;
+            top: 0;
+            left: 0;
+        }
+        #mask{
+            width: 400px;
+            height: 400px;
+            background: #ffff00;
+            position: absolute;
+            top: 0;
+            left: 0;
+            opacity: 0;
+            filter:alpha(opacity = 0);
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="small">
+        <img src="1.jpg" alt="" />
+        <div id="bar"></div>
+        <div id="mask"></div>
+    </div>
+    <div id="big">
+        <img src="2.jpg" alt="" id="bigImg"/>
+    </div>
+
+</div>
+    <script>
+        oMask = document.getElementById("mask");
+        oSmall = document.getElementById("small");
+        oSmallImg = oSmall.getElementsByTagName("img")[0];
+
+        oGlass = oSmall.getElementsByTagName("div")[0];
+
+        oBig = document.getElementById("big");
+        oMoveImg = document.getElementById("bigImg");
+//        oSmall.onmouseover = function(e){
+        oMask.onmouseover = function(e){
+            oBig.style.visibility = "visible";
+            oGlass.style.visibility = "visible";
+//            oSmall.onmousemove = function(e){
+            oMask.onmousemove = function(e){
+                e = e || window.event;
+                var left = e.clientX - oGlass.offsetWidth/2;
+                var top = e.clientY - oGlass.offsetHeight/2;
+                var disX =oSmall.offsetWidth - oGlass.offsetWidth;
+                var disY =oSmall.offsetHeight - oGlass.offsetHeight;
+                if(left <= 0){    left = 0;}
+                if(left >= disX){ left = disX;}
+                if(top <= 0){     top = 0;}
+                if(top >= disY){  top = disY;}
+
+                oGlass.style.left = left + "px";
+                oGlass.style.top = top + "px";
+
+                var timeX = left / disX;
+                var timeY = top / disY;
+                oMoveImg.style.left =-(timeX*(oMoveImg.offsetWidth-oBig.offsetWidth))+"px";
+                oMoveImg.style.top =-(timeY*(oMoveImg.offsetHeight-oBig.offsetHeight))+"px";
+            };
+        };
+//        oSmall.onmouseout = function(){
+        oMask.onmouseout = function(){
+            oBig.style.visibility = "hidden";
+            oGlass.style.visibility = "hidden";
+
+        };
+    </script>
+</body>
+</html>
