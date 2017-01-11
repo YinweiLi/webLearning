@@ -1,0 +1,96 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+imG{
+    border: 0;
+}
+#container{
+    width: 570px;
+    height: 500px;
+    position:relative;
+    margin:100px auto;
+    overflow:hidden;
+}
+#big-img{
+    width: 570px;
+    height: 400px;
+    position:relative;
+
+}
+#big-img img{
+    width: 570px;
+    height: 400px;
+    position:absolute;
+    top: 0;
+    left: 0;
+
+}
+#small-img{
+    width: 1130px;
+
+    position: absolute;
+    background: #cccccc;
+
+    left: 0px;
+    top: 400px;
+}
+#small-img img{
+    width: 130px;
+    height: 80px;
+    float:left;
+    padding: 10px 0 10px 10px;
+}
+#info{
+    width: 560px;
+    height: 30px;
+    position:absolute;
+    bottom: 0px;
+    z-index: 9;
+    background: black;
+    opacity: .5;
+    filter:alpha(opacity = 50);
+    color: white;
+    line-height: 30px;
+    padding-right: 10px;
+
+}
+#info span{
+    float: right;
+
+}
+#arrows{
+    position: absolute;
+    width: 100%;
+    height: 60px;
+    top: 50%;
+    margin-top: -30px;
+
+
+}
+#arrows span{
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    background-image: url(imgs/btn.gif);
+    background-repeat: no-repeat;
+    opacity: 0;
+    filter:alpha(opacity = 0);
+}
+#prev{
+    z-index: 9;
+    left: 10px;
+    background-position: 0 0;
+}
+#next{
+    z-index: 9;
+    right: 10px;
+    background-position: 0 -60px;
+}
+/*浮动没上去，是父元素的宽度不够*/
+/*盒模型，宽度和高度是给内容加的*/
+/*background用法*/
+/*display设置成none，visibility设置成hidden都绑定不了事件
+opacity不影响
+*/
+/*cssspirit精灵用的都是background-img*/

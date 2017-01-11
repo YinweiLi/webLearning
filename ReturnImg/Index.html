@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>图片轮换播放</title>
+    <link rel="stylesheet" href="Index.css"/>
+</head>
+<body>
+    <div id="container">
+        <div id="big-img">
+            <img src="imgs/1.jpg" alt="" style="z-index: 8"/>
+            <img src="imgs/2.jpg" alt="" style="z-index: 7"/>
+            <img src="imgs/3.jpg" alt="" style="z-index: 6"/>
+            <img src="imgs/4.jpg" alt="" style="z-index: 5"/>
+            <img src="imgs/5.jpg" alt="" style="z-index: 4"/>
+            <img src="imgs/6.jpg" alt="" style="z-index: 3"/>
+            <img src="imgs/7.jpg" alt="" style="z-index: 2"/>
+            <img src="imgs/8.jpg" alt="" style="z-index: 1"/>
+            <div id="info">
+                <span id="total-page">/8</span>
+                <span id="current-page">1</span>
+
+            </div>
+            <div id="arrows">
+                <span id="prev"></span>
+                <span id="next"></span>
+            </div>
+        </div>
+        <div id="small-img">
+            <img src="imgs/1.jpg" alt=""/>
+            <img src="imgs/2.jpg" alt=""/>
+            <img src="imgs/3.jpg" alt=""/>
+            <img src="imgs/4.jpg" alt=""/>
+            <img src="imgs/5.jpg" alt=""/>
+            <img src="imgs/6.jpg" alt=""/>
+            <img src="imgs/7.jpg" alt=""/>
+            <img src="imgs/8.jpg" alt=""/>
+        </div>
+    </div>
+    <script src="jslib.js"></script>
+    <script src="Index.js"></script>
+</body>
+</html>
