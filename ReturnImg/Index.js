@@ -79,6 +79,9 @@ function imgChange(){
         aSmall[i].style.opacity = .3;
         aSmall[i].style.filter = "alpha(opacity = 30)";
     }
+    //animate(aSmall[No],{
+    //    opacity :100
+    //});
     aSmall[No].style.opacity = 1;
     aSmall[No].style.filter = "alpha(opacity = 100)";
 
