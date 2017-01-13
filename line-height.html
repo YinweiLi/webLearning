@@ -4,17 +4,11 @@
     <meta charset="UTF-8">
     <title>Title</title>
     <style>
-        p{
-            width: 200px;
-            background: #c000c0;
-            line-height: 200px;
-        }
+
     </style>
 </head>
 <body>
-    <p>
-        哈哈哈哈
-    </p>
+
 <!--前台向后台提交数据get，form表单，阿贾克斯异步-->
     <form action="aa.java" id="form">
 
@@ -32,7 +26,7 @@
 //            var passWord = oForm.password.value;
 //            console.log(userName + passWord);
 //            console.log("sdfghjkl");
-////            return false;
+//            return false;
 //        };
         //        var input = prompt("input","12");
         //        console.log(input);
@@ -56,17 +50,190 @@
             }
 
         }
-        function factorial(){
-            var n = 10;
+        function factorial(n){
+//            var n = 10;
             var all = 1;
             for(var i = 1;i <= n; i++){
                 all = i*all;
             }
             console.log(all);
+            return all;
+        }
+        function factorialE(n){
+            var total=0;
+            for(var i = 1;i <= n;i++){
+                total += factorial(i);
+            }
+            console.log(total);
+            return total;
+        }
+        function outnumber(){
+            var n = 5;
+            for(var i = 1;i <= n;i++){
+                var m = 1;
+                while(m<=i){
+                    document.write(m+" ");
+                    m++;
+                }
+                document.write("<br>");
+            }
+        }
+        function outstars(){
+            var n = 5;
+
+            for(var i = 0;i < n;i++){
+                var str = "";
+                for(var j = 0;j < n-i;j++){
+                    str += " ";
+//                    document.write("&nbsp");
+//                    console.log(" ");
+                }
+                for(var j = 0;j <= i; j++){
+                    str += "* "
+//                    document.write("*"+"&nbsp");
+//                    console.log("* ");
+                }
+                console.log(str);
+                document.write(str);
+                document.write("<br>");
+            }
+        }
+
+        function f(){
+            var x = prompt("input","12");
+           var X = 0;
+            X = 4*x*x+3*x+2;
+            console.log(X);
+
+        }
+        function Min(){
+            var oForm = document.getElementById("form");
+            oForm.onsubmit = function(){
+                var userName = oForm.username.value;
+                var passWord = oForm.password.value;
+                console.log(userName + passWord);
+                if(userName<=passWord){
+                    console.log(userName);
+                }else{
+                    console.log(passWord);
+                }
+                return false;
+            };
+
+        }
+        function ThreeFiveSeven(n){
+
+            if(n%3==0&&n%5==0&&n%7==0){
+                document.write(n+"能被3，5，7整除<br>")
+            }
+            var all=0;
+            for(var i = 1;i <= 1000;i++){
+                if(i % 3 == 0 && i % 5 == 0 && i % 7 == 0){
+                    document.write(i+" ");
+                    all++;
+                    if(all % 6 == 0){
+                        document.write("<br>");
+                    }
+                }
+
+            }
+
+        }
+        function prime(start,end){
+            function _isPrime(num){
+                if(num == 2){
+                    return true;
+                }
+                if(num%2 == 0){
+                    return false;
+                }
+                for(var i=3;i < num;i+=2){
+                    if(num%i ==0){
+                        return false;
+                    }
+                }
+                return true;
+            }
+            var primeNum = [];
+            for(var i=start;i<=end;i++){
+                if(_isPrime(i)){
+                    primeNum.push(i);
+                }
+            }
+            return primeNum.join(',');
+        }
+        function feibonacci(num){
+//            1 1 2 3 5 8...
+//            前两个是1，之后的咩一项都是前两项的和
+            if(num == 1 || num == 2){
+                return 1;
+            }
+            return feibonacci(num-1)+feibonacci(num-2);
+        }
+        function feibonacciS(num){
+            var arr = [1,1];
+            for(var i = 2;i<num;i++){
+                arr[i] = arr[i-1]+arr[i-2];
+            }
+            return arr[num-1];
+        }
+        console.log(feibonacci(10)+","+feibonacciS(10));
+        //function prime(n){
+        //    var primeArr = [2];
+        //    var isPrime = function(num, primeList){
+        //        if(num == 2){
+        //            return true;
+        //        }
+        //        for(var i = 3, iLen = Math.sqrt(num), j = 1; i <= iLen; i = primeList[j++]){
+        //            if(num % i == 0){
+        //                return false;
+        //            }
+        //        }
+        //        return true;
+        //    }
+        //    if(isNaN(n) || n < 1){
+        //        return [];
+        //    }
+        //    for(var i = 3,  i < n; i += 2){
+        //        if(isPrime(i, primeArr)){
+        //            primeArr.push(i);
+        //
+        //        }
+        //    }
+        //    return primeArr;
+        //}
+        function getRangeRandom(low,high){
+            return Math.floor(Math.random()*(high-low+1))+low;
+        }
+        function dayOfYear(year,month,day){
+
+
         }
         random();
         leapYear();
-        factorial();
+        factorial(10);
+        factorialE(10);
+        outnumber();
+        outstars();
+//        f();
+//        Min();
+        var aNum = 105;
+        ThreeFiveSeven(aNum);
+
+        var result = prime(2,200);
+        document.write('2~200之间共有素数'+result.split(',').length+'个,它们是：\n'+result);
+//上来先写一个函数立即调用，代码都写在里面，来解决window污染全局变量得问题
+//        (function(){
+//              var a = 0;
+//                ...
+//                ...
+//              })();
+        for(var i = 0;i<20;i++){console.log(getRangeRandom(0,100))}
+        var date = new Date();
+        document.write(date.getDate());
+        document.write("<br>"+Date());
+
+
     </script>
 </body>
 
