@@ -1,0 +1,126 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+ul ,ol{
+    list-style: none;
+}
+img{
+    border: 0;
+}
+a{
+    text-decoration: none;
+}
+#news{
+    height: 153px;
+}
+#news a{
+    font-size: 12px;
+    color: #333;
+}
+#news-box{
+    width: 640px;
+    height: 135px;
+    float: left;
+}
+#notice-box{
+    width: 400px;
+    height: 135px;
+    float: right;
+}
+#news-menu{
+    height: 35px;
+    margin: 10px;
+    /*line-height: 35px;*/
+}
+#news-menu h3{
+    margin: 0px;
+    padding: 0px;
+    float: left;
+    color: #333;
+    margin-top: 6px;
+    font-size: 16px;
+    line-height: 35px;
+}
+#news-menu a{
+    width: 100px;
+    height: 30px;
+    float: right;
+    line-height: 35px;
+    text-align: center;
+}
+#news-menu a:hover{
+    color:white;
+    background: #e06666;
+    border-radius: 15px;
+}
+#news-list span{
+    float:left;
+    width: 295px;
+    height: 30px;
+    padding-left: 15px;
+    margin-left: 10px;
+    /*text-align: center;*/
+    color:#333;
+    line-height: 30px;
+    background: url("../images/home-bg1.png") no-repeat left center;
+}
+#notice-menu{
+    margin: 10px;
+    height: 35px;
+}
+#notice-menu h3{
+    float: left;
+    margin: 0px;
+    padding: 0px;
+    color: #333;
+    margin-top: 6px;
+    font-size: 16px;
+    line-height: 35px;
+}
+#notice-menu a{
+    width: 100px;
+    height: 30px;
+    float: right;
+    line-height: 35px;
+    text-align:center;
+}
+#notice-menu a:hover{
+    color:white;
+    background: #e06666;
+    border-radius: 15px;
+}
+#notice-list{
+    width: 382px;
+    height: 92px;
+    border: 1px dotted black;
+}
+#notice-list li{
+    float:left;
+    width: 360px;
+    height: 30px;
+    padding-left: 15px;
+    margin-left: 10px;
+    /*text-align: center;*/
+    line-height: 30px;
+    background: url("../images/home-bg1.png") no-repeat left center;
+    text-align: center;
+}
+#course{
+    height: 450px;
+    /*background:black;*/
+}
+#course h2{
+    text-align: center;
+    color: #666;
+    font-size: 30px;
+    margin-top: 40px;
+    margin-bottom: 15px;
+}
+#course h5{
+    text-align: center;
+    font-size: 18px;
+    color: #666;
+    margin-bottom: 35px;
+    font-weight: bold;
+}

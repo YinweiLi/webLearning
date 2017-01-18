@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>贪吃蛇-过程</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #container{
+            width: 1000px;
+            /*height: 500px;*/
+            border: 1px solid black;
+            margin: 100px auto;
+        }
+        #ground{
+            height: 500px;
+            background: #cccccc;
+            position: relative;
+        }
+        #control{
+            height: 50px;
+            line-height: 50px;
+        }
+        #control span{
+            float: left;
+        }
+        #buttons{
+            float: right;
+
+        }
+        #buttons button{
+            cursor: pointer;
+        }
+        .block{
+            width: 20px;
+            height: 20px;
+            background: orange;
+            float:left;
+        }
+        .snack{
+            background: red;
+            position: absolute;
+            top: 60px;
+        }
+        .food{
+            background: green;
+            position: absolute;
+
+        }
+    </style>
+</head>
+<body>
+<div id="container">
+    <div id="ground"></div>
+    <div id="control">
+        <span>简单贪吃蛇</span>
+        <div id="buttons">
+            <button id="start">start</button>
+            <button id="pause">pause</button>
+            <button id="faster">faster</button>
+            <button id="slower">slower</button>
+        </div>
+    </div>
+
+</div>
+<script>
+   var ground = {
+       creatFood:function(){
+
+       }
+
+   };
+   var snake = {
+       move:function(){
+
+       },
+       eat:function(){
+
+       }
+   }
+   var food = {
+
+   };
+   var game = {
+       init:function(){
+
+       },
+       start:function(){
+
+       },
+       pause:function(){
+
+       }
+   };
+   game.init();
+    //        面向对象
+    //        ooa analyse分析
+    //        ood design设计
+    //        oop program实现
+</script>
+</body>
+</html>

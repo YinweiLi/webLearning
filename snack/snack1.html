@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html>
+<head lang="en">
+    <meta charset="UTF-8">
+    <title>贪吃蛇-过程</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        #container{
+            width: 1000px;
+            /*height: 500px;*/
+            border: 1px solid black;
+            margin: 100px auto;
+        }
+        #ground{
+            height: 500px;
+            background: #cccccc;
+            position: relative;
+        }
+        #control{
+            height: 50px;
+            line-height: 50px;
+        }
+        #control span{
+            float: left;
+        }
+        #buttons{
+            float: right;
+
+        }
+        #buttons button{
+            cursor: pointer;
+        }
+        .block{
+            width: 20px;
+            height: 20px;
+            background: orange;
+            float:left;
+        }
+        .snack{
+            background: red;
+            position: absolute;
+            top: 60px;
+        }
+        .food{
+            background: green;
+            position: absolute;
+
+        }
+    </style>
+</head>
+<body>
+    <div id="container">
+        <div id="ground"></div>
+        <div id="control">
+            <span>简单贪吃蛇</span>
+            <div id="buttons">
+                <button id="start">start</button>
+                <button id="pause">pause</button>
+                <button id="faster">faster</button>
+                <button id="slower">slower</button>
+            </div>
+        </div>
+
+    </div>
+    <script>
+        var oFaster = document.getElementById("faster");
+        var oSlower = document.getElementById("slower");
+        var speed = 500;
+        oFaster.onclick = oSlower.onclick = function(){
+            if(this == oFaster){
+                speed += 50;
+            }else{
+                speed -=50;
+            }
+        };
+        //初始化操场
+        var oGround = document.getElementById("ground");
+        for(var i = 0;i < 50*25; i++){
+            var oDiv = document.createElement("div");
+            oDiv.className = "block";
+            oGround.appendChild(oDiv);
+        }
+        //创建蛇
+        var snackBody = [];
+        for(var i = 0 ;i < 3; i++){
+            var oDiv = document.createElement("div");
+            oDiv.className = "block snack";
+//            多类选择器
+            oDiv.style.left = (3-i)*20+"px";
+            oGround.appendChild(oDiv);
+            snackBody.push(oDiv);
+        }
+        //创建食物
+        CreatFood();
+        var oFood;
+        function CreatFood(){
+            oFood = document.createElement("div");
+            oFood.className = "block food";
+            //            多类选择器
+
+            var x,y;
+
+            do{
+                var bFound = true;
+                x = Math.floor(Math.random()*50)*20;
+                y = Math.floor(Math.random()*25)*20;
+                for(var i = 0;i<snackBody.length;i++){
+                    if(snackBody[i].offsetLeft == x && snackBody[i].offsetTop == y){
+                        bFound = false;
+                    }
+                }
+            }while(!bFound);
+            oFood.style.left = x + "px";
+            oFood.style.top = y + "px";
+            oGround.appendChild(oFood);
+        }
+        //蛇移动
+        var direction = "down";
+        var T;
+        var oButtonStart = document.getElementById("start");
+        oButtonStart.onclick = function(){
+            clearInterval(T);
+             T = setInterval(function(){
+
+
+                 move(oFood);
+            },speed)
+
+
+        };
+        document.onkeydown = function(e){
+            e = e||window.event;
+            var keyCode = e.which || e.keyCode;
+            switch (keyCode){
+                case 37:
+                        if(direction != "right"){
+                            direction = "left";
+                            move();
+                        }
+                    break;
+                case 38:
+                        if(direction != "down"){
+                            direction = "up";
+                            move();
+                        }
+                    break;
+                case 39:
+                        if(direction != "left"){
+                            direction = "right";
+                            move();
+                        }
+                    break;
+                case 40:
+                        if(direction != "up"){
+                            direction = "down";
+                            move();
+                        }
+
+                    break;
+
+            }
+            console.log(e.which);
+        };
+        var oButtonPause = document.getElementById("pause");
+        oButtonPause.onclick = function(){
+            clearInterval(T);
+        };
+        function move(){
+            if(isDiea()){
+             return false;
+            }
+
+//                for(var i = snackBody.length-1;i > 0; i--){
+//                    snackBody[i].style.left = snackBody[i-1].offsetLeft+"px";
+//                }
+//                if(direction == "right"){
+//                    snackBody[0].style.left = (snackBody[0].offsetLeft+20) +"px";
+//                }
+            for(var i = 0;i < snackBody.length;i++){
+                snackBody[i].left = snackBody[i].offsetLeft;
+                snackBody[i].top = snackBody[i].offsetTop;
+            }
+           headMove(snackBody);
+            for(var i = 1;i < snackBody.length;i++){
+                snackBody[i].style.left = snackBody[i-1].left +"px";
+                snackBody[i].style.top = snackBody[i-1].top +"px";
+            }
+            //吃食物
+            if(snackBody[0].offsetLeft == oFood.offsetLeft && snackBody[0].offsetTop == oFood.offsetTop){
+                oFood.className = "block snack";
+                snackBody.splice(1,0,oFood);
+                headMove(snackBody);//加上head Move是吃完立马给头往前定位，也就是头突然向前走了
+                //不加head Move，就会有一个消化的过程，头不会突然地往前长
+//                这样在墙边上的时候就会有一个很尴尬的问题，吃完食物头立马长就会撞墙死掉，
+//                要是不立马长就不会死，但吃完别的的时候也不会立马长长
+                CreatFood();
+                console.log(snackBody.length);
+
+            }
+
+        }
+        function headMove(snackBody){
+            if(isDiea()){
+                return false;
+            }
+            if(direction == "right"){
+                snackBody[0].style.left = (snackBody[0].offsetLeft+20) +"px";
+            }else{
+                if(direction == "down"){
+                    snackBody[0].style.top = (snackBody[0].offsetTop+20) +"px";
+                }else{
+                    if(direction == "left"){
+                        snackBody[0].style.left = (snackBody[0].offsetLeft-20) +"px";
+                    }else{
+                        if(direction == "up"){
+                            snackBody[0].style.top = (snackBody[0].offsetTop-20) +"px";
+                        }
+                    }
+                }
+            }
+        }
+        function isDiea(){
+            for(var i = 4;i<snackBody.length;i++){
+                if(snackBody[0].offsetLeft == snackBody[i].offsetLeft && snackBody[0].offsetTop == snackBody[i].offsetTop){
+                    alert("diea");
+                    clearInterval(T);
+                    return true;
+                }
+            }
+            if(snackBody[0].offsetLeft <= -20 || snackBody[0].offsetLeft >= 1000
+                    || snackBody[0].offsetTop <= -20 || snackBody[0].offsetTop >= 500){
+                alert("diea");
+                clearInterval(T);
+                return true;
+            }else{
+                return false;
+            }
+
+        }
+//        面向对象
+//        ooa analyse分析
+//        ood design设计
+//        oop program实现
+    </script>
+</body>
+</html>
